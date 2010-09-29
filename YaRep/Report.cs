@@ -23,7 +23,7 @@ namespace YaRep
         /// <returns>экземпляр класса для работы с отчетом</returns>
         public static Report Begin()
         {
-            throw new NotImplementedException();
+            return new Report();
         }
 
         /// <summary>
@@ -31,6 +31,14 @@ namespace YaRep
         /// </summary>
         public void End()
         {
+        }
+
+        private Dictionary<string,Sheet> sheets = new Dictionary<string,Sheet>();
+        public RandomAccessSheet CreateRandomAccessSheet(string sheetName)
+        {
+            var sheet = new RandomAccessSheet();
+            sheets.Add(sheetName, sheet);
+            return sheet;
         }
     }
 }

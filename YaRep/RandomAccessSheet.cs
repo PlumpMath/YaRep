@@ -8,7 +8,7 @@ namespace YaRep
     /// <summary>
     /// Отчет со свободныи доступом в любую ячейку.
     /// </summary>
-    class RandomAccessSheet: Sheet
+    public class RandomAccessSheet: Sheet
     {
         internal RandomAccessSheet()
         {
@@ -56,6 +56,7 @@ namespace YaRep
                 newData[i] = new object[0];
             }
             data = newData;
+            rows = newRows;
         }
 
         private object[] AllocCols(int newColumns, object[] rowArray)
@@ -67,6 +68,8 @@ namespace YaRep
             {
                 newArray[i] = defaultValue;
             }
+            if (newColumns > columns)
+                columns = newColumns;
             return newArray;
         }
 
@@ -123,12 +126,13 @@ namespace YaRep
             {
                 if (row >= rows)
                 {
-                    AllocRows(rows);
+                    AllocRows(row+1);
                 }
                 var rowArray = data[row];
                 if (column >= rowArray.Length)
                 {
-                    data[row] = AllocCols(column, rowArray);
+                    rowArray = AllocCols(column+1, rowArray);
+                    data[row] = rowArray;
                 }
                 rowArray[column] = value;
             }
