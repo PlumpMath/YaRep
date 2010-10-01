@@ -14,7 +14,7 @@ namespace Example1
 
             var ras = report.CreateRandomAccessSheet("tst");
             object tst = ras[10,10];
-            ras[1, 1] = 10;
+            ras[1, 2] = 10;
 
             report.End();
 

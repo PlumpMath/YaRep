@@ -44,8 +44,8 @@ namespace YaRep
                 var excelSheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, Type.Missing, Type.Missing);
                 excelSheet.Name = PrepareSheetNameForExcel(sheet.Key);
                 var data = sheet.Value.GetArray();
-                int cols = data.GetLength(0);
                 int rows = data.GetLength(0);
+                int cols = data.GetLength(1);
                 if ((cols < 1) || (rows < 1)) continue;
                 excelSheet.get_Range(excelSheet.Cells[1, 1], excelSheet.Cells[rows, cols]).Value2 = data;
             }
