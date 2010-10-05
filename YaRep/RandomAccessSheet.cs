@@ -138,6 +138,14 @@ namespace YaRep
             }
         }
 
+        public bool IsEmpty
+        {
+            get
+            {
+                return ((rows==0)||(columns==0));
+            }
+        }
+
 
     }
 }

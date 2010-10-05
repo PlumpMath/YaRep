@@ -59,5 +59,12 @@ namespace YaRep
             sheets.Add(sheetName, sheet);
             return sheet;
         }
+
+        public TableSheet CreateTableSheet(string sheetName)
+        {
+            var sheet = new TableSheet();
+            sheets.Add(sheetName, sheet);
+            return sheet;
+        }
     }
 }
