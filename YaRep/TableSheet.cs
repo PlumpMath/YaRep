@@ -48,13 +48,19 @@ namespace YaRep
             if (rows == null) rows = new List<object[]>();  // TODO: Подумать, как техничнее обойти ситуацию, когда записей нет... но шапку-то выводить надо!
 
             int headerRows = headerArray.GetLength(0);
+            int headerCols = headerArray.GetLength(0);
             int resultCols = columns.Count;
             int resultRows = headerRows + 1 + rows.Count;
 
-            object[,] result = new object[resultRows, resultCols];
+            object[,] result = new object[resultRows, Math.Max(resultCols,headerCols)];
 
-            //TODO: Сделать копирование шапки!
-            //headerArray.CopyTo(result, 0);
+            for (int rowNum = 0; rowNum < headerRows; rowNum++)
+            {
+                for (int colNum = 0; colNum < headerCols; colNum++)
+                {
+                    result[rowNum, colNum] = headerArray[rowNum, colNum];
+                }
+            }
             
 
             for (int columnNum = 0; columnNum < resultCols; columnNum++)
