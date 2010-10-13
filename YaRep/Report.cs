@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Office.Interop.Excel;
 
 namespace YaRep
 {
@@ -36,18 +37,28 @@ namespace YaRep
         /// </summary>
         public void End()
         {
-            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            Application excel = new Microsoft.Office.Interop.Excel.Application();
             excel.Visible = false;
             var workbook = excel.Workbooks.Add(Type.Missing);
+            int origSheets = workbook.Sheets.Count;
+            Worksheet[] origSheet = new Worksheet[origSheets];
+            for(int i=0;i<origSheets;i++)
+            {
+                origSheet[i] = (Worksheet)workbook.Sheets.get_Item(i+1);
+            }
             foreach (var sheet in sheets)
             {
-                var excelSheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                var excelSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, Type.Missing, Type.Missing);
                 excelSheet.Name = PrepareSheetNameForExcel(sheet.Key);
                 var data = sheet.Value.GetArray();
                 int rows = data.GetLength(0);
                 int cols = data.GetLength(1);
                 if ((cols < 1) || (rows < 1)) continue;
                 excelSheet.get_Range(excelSheet.Cells[1, 1], excelSheet.Cells[rows, cols]).Value2 = data;
+            }
+            foreach (var sheet in origSheet)
+            {
+                sheet.Delete();
             }
             excel.Visible = true;
         }
