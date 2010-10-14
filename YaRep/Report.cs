@@ -37,6 +37,7 @@ namespace YaRep
         /// </summary>
         public void End()
         {
+            if (sheets.Count < 1) return;
             Application excel = new Microsoft.Office.Interop.Excel.Application();
             excel.Visible = false;
             var workbook = excel.Workbooks.Add(Type.Missing);
