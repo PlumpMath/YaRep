@@ -10,7 +10,7 @@ namespace YaRep
     /// Колонки ее именованы.
     /// Данные добавляются построчно.
     /// </summary>
-    public class TableSheet : Sheet
+    public sealed class TableSheet : Sheet
     {
         
 

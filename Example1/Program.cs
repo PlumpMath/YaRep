@@ -23,6 +23,16 @@ namespace Example1
             table.AddRow("fdsa",456);
 
 
+            var acc = report.CreateAccumulationSheet("accumulator");
+            acc.AddValue("A", 1);
+            acc.AddValue("B", 2);
+            acc.AddValue("A", 3);
+            acc.AddValue("B", 4);
+            acc.AddValue("A", 5);
+            acc.AddValue("C", 6);
+            acc.AddValue("A", 7);
+
+
             report.End();
         }
     }

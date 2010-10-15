@@ -49,9 +49,10 @@ namespace YaRep
             }
             foreach (var sheet in sheets)
             {
+                var data = sheet.Value.GetArray();
+                if (data == null) continue;
                 var excelSheet = (Worksheet)workbook.Sheets.Add(Type.Missing, Type.Missing, Type.Missing, Type.Missing);
                 excelSheet.Name = PrepareSheetNameForExcel(sheet.Key);
-                var data = sheet.Value.GetArray();
                 int rows = data.GetLength(0);
                 int cols = data.GetLength(1);
                 if ((cols < 1) || (rows < 1)) continue;
@@ -75,6 +76,13 @@ namespace YaRep
         public TableSheet CreateTableSheet(string sheetName)
         {
             var sheet = new TableSheet();
+            sheets.Add(sheetName, sheet);
+            return sheet;
+        }
+
+        public AccumulationSheet CreateAccumulationSheet(string sheetName)
+        {
+            var sheet = new AccumulationSheet();
             sheets.Add(sheetName, sheet);
             return sheet;
         }

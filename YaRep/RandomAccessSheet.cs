@@ -8,7 +8,7 @@ namespace YaRep
     /// <summary>
     /// Отчет со свободныи доступом в любую ячейку.
     /// </summary>
-    public class RandomAccessSheet: Sheet
+    public sealed class  RandomAccessSheet: Sheet
     {
         internal RandomAccessSheet()
         {
