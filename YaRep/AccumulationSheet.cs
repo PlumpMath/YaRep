@@ -14,7 +14,7 @@ namespace YaRep
 
         internal override object[,] GetArray()
         {
-            if ((maxValues < 1) || (data.Count < 1)) return null;
+            if (/*(maxValues < 1) || */(data.Count < 1)) return null;
 
             object[,] result = new object[maxValues+1, data.Count];
 
@@ -45,6 +45,12 @@ namespace YaRep
             if (!data.TryGetValue(setName, out setList)) { setList = new List<object>(); data.Add(setName, setList); }
             setList.Add(value);
             if (setList.Count > maxValues) maxValues = setList.Count;
+        }
+
+        public void AddSet(string setName)
+        {
+            if (data.ContainsKey(setName)) return;
+            data.Add(setName, new List<object>());
         }
 
     }
