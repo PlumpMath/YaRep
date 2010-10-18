@@ -47,6 +47,14 @@ namespace YaRep
             if (setList.Count > maxValues) maxValues = setList.Count;
         }
 
+        public void AddValues(string setName, IEnumerable<object> values)
+        {
+            List<object> setList = null;
+            if (!data.TryGetValue(setName, out setList)) { setList = new List<object>(); data.Add(setName, setList); }
+            setList.AddRange(values);
+            if (setList.Count > maxValues) maxValues = setList.Count;
+        }
+
         public void AddSet(string setName)
         {
             if (data.ContainsKey(setName)) return;
