@@ -57,12 +57,15 @@ namespace YaRep
                 int cols = data.GetLength(1);
                 if ((cols < 1) || (rows < 1)) continue;
                 excelSheet.get_Range(excelSheet.Cells[1, 1], excelSheet.Cells[rows, cols]).Value2 = data;
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelSheet);
             }
             foreach (var sheet in origSheet)
             {
                 sheet.Delete();
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(sheet);
             }
             excel.Visible = true;
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(excel);
         }
 
         private Dictionary<string,Sheet> sheets = new Dictionary<string,Sheet>();
